@@ -1,4 +1,12 @@
     X-Ray image processing
+    
+    cut the threat objects, scale it down, rotate with 45 degree and paste it
+into the background images using image processing techniques in python.
+Threat objects should be translucent, means it should not look like that it is cut pasted. It
+should look like that the threat was already there in the background images. Translucent
+means the threat objects should have shades of background where it is pasted.
+Threat should not go outside the boundary of the baggage.
+
 
 Steps to follow
 
