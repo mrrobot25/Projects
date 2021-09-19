@@ -1,0 +1,43 @@
+    X-Ray image processing
+
+Steps to follow
+
+    • First of all import all the necessary libraries.
+    • Make sure you have installed openCV and python 3.7 or above.
+      Then read the background image and threat image using openCV’s cv2.imread method.
+    • original_width and original height are the width and height of the background image.
+
+
+
+Functions
+
+    • scaled() :
+    1. this function accepts threat image and scaling factor as a parameters.
+    2. width,height – scales down width and height of the threat image. 
+    3. resized_img  - resizes the image using above dimensions.
+    4. img_copy – copys resized image and returns it.
+
+    • mask():
+    1. this function accepts rotated_and_resized  ,background image and scaled image as a parameters.
+    2. lower_white , upper_white are used to specify range of the white colour.
+    3. mask – variable is a mask created to seperate threat object from background using openCV’s cv2.inRange method. 
+    4. masked_img[mask!=0] = [0,0,0] this line changes pixel value to black whenever mask is not present.
+    5. crop_back[mask == 0]=[255,255,255] this line crops the background_image where mask is present.
+
+    • Padding():
+    1. this function accepts masked image and top,bottom,left,righ parameters which are aquired by substracting dimensions of scaled threat image from original threat image.they tell us how much padding to do in each side.
+    2. border – uses openCVs cv2.copyMakeBorder method to generate border around the image ie it adds padding to the image. We need this because after scaling down we need to make image size equal to background image without increasing the size of the scaled down object.
+    3. We resize it and return border_resized.
+       
+
+    • rotate():
+    1. this function accepts border_resized as a parameter.
+    2. We need scpi’s ndimage library to rotate image
+        from scipy import ndimage
+    3. black_pix – this finds pixel with black value and replaces it with white value using rotated[black_pix] = [255,255,255]  line.
+    4. After resizing same as background image returns rotated_resized.
+
+
+    • final_image():
+    1. this function accepts background image and threat image as a parameteters.
+    2. Adds threat image on the background ie baggage image.And returns modefied image.
